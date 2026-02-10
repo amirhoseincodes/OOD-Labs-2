@@ -19,18 +19,6 @@ public class TicketContext {
         this.type = type;
         this.channelStrategy = channelStrategy;
         this.typeStrategy = typeStrategy;
-        this.currentState = new NewState();
-        this.status = "NEW";
-    }
-
-    public TicketContext(int id, String channel, String type) {
-        this(
-            id,
-            channel,
-            type,
-            TicketFactory.createChannelStrategy(channel),
-            TicketFactory.createTypeStrategy(type)
-        );
     }
 
     public void handle() {
