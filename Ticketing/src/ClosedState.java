@@ -1,3 +1,5 @@
+
+
 public class ClosedState implements TicketState {
     @Override
     public void handle(TicketContext context) {

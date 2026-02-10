@@ -1,3 +1,4 @@
+
 public class Ticket {
     int id;
     String status = "NEW";

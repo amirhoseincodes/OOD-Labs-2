@@ -1,3 +1,7 @@
+
+import Strategies.TicketChannelStrategy;
+import Strategies.TicketTypeStrategy;
+
 public class TicketContext {
     private TicketState currentState;
     private int id;
@@ -6,13 +10,27 @@ public class TicketContext {
     private String request;
     private String response;
     private String status;
+    private TicketChannelStrategy channelStrategy;
+    private TicketTypeStrategy typeStrategy;
 
-    public TicketContext(int id, String channel, String type) {
+    public TicketContext(int id, String channel, String type, TicketChannelStrategy channelStrategy, TicketTypeStrategy typeStrategy) {
         this.id = id;
         this.channel = channel;
         this.type = type;
+        this.channelStrategy = channelStrategy;
+        this.typeStrategy = typeStrategy;
         this.currentState = new NewState();
         this.status = "NEW";
+    }
+
+    public TicketContext(int id, String channel, String type) {
+        this(
+            id,
+            channel,
+            type,
+            TicketFactory.createChannelStrategy(channel),
+            TicketFactory.createTypeStrategy(type)
+        );
     }
 
     public void handle() {
@@ -23,6 +41,9 @@ public class TicketContext {
         this.currentState = state;
         this.status = state.getStatus();
     }
+
+    public TicketChannelStrategy getChannelStrategy() { return channelStrategy; }
+    public TicketTypeStrategy getTypeStrategy() { return typeStrategy; }
 
     public String getStatus() { return status; }
     public int getId() { return id; }
