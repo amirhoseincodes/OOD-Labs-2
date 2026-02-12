@@ -33,6 +33,8 @@
 
 ![Class Diagram](images/Ticket-Class-Diagram.png)
 
+در این دیاگرام سه الگوی `State`، `Strategy` و `Factory` مشخص‌اند: `TicketContext` نقش `Context` را دارد و با نگه داشتن `currentState` از نوع `TicketState` رفتار هر وضعیت را به کلاس‌های جدا (`NewState` تا `ClosedState`) واگذار می‌کند و هر State وضعیت بعدی را تعیین می‌کند؛ رفتارهای وابسته به کانال و نوع با دو اینترفیس `TicketChannelStrategy` و `TicketTypeStrategy` و پیاده‌سازی‌هایشان جدا شده‌اند تا تغییرپذیر باشند؛ و ساخت شیء تیکت به‌همراه تنظیم وضعیت اولیه و تزریق استراتژی‌ها در `TicketFactory` و کارخانه‌های `Web/Email` انجام می‌شود تا منطق ایجاد از بقیه کد جدا بماند.
+
 ---
 # **بخش ۳) اعمال الگو ها**
 در این بخش نیز الگو‌های `Factory`,`Strategy`,`State` که در بخش اول بیان شده اند را پیاده‌سازی می کنیم. کد مربوط به الگو ها در پوشه Ticketing موجود هستند.
